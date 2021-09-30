@@ -1,6 +1,6 @@
 // define() the model here and export it
 
-import { sequelize } from "../index.js";
+import { sequelize } from "../db.js";
 import s from "sequelize";
 
 const { DataTypes } = s

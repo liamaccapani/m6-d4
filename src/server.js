@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { connectDB, testDB } from "./db/index.js";
+import { connectDB, testDB } from "./db/db.js";
 import { badRequest, forbidden, notFound, serverError } from "./errorHandlers.js";
 import productsRouter from "./services/products/routes.js"
 import reviewsRouter from "./services/reviews/routes.js"

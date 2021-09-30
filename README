@@ -1,0 +1,17 @@
+Shopping Cart
+Start from yesterday's home work
+
+Add  Category, User models to you project.
+Implement associations between Category and Product as many-to-many.
+Implement associations between User and Review as one-to-many.
+Implement CRUDS for  category, users
+In GET /products endpoint product should include categories, user and comments ( comments should include user who posted that comment,
+ 
+
+ 
+
+[EXTRA]:
+
+Get the most expensive product in products table
+Get the most expensive product in products table and include Category
+Get the most expensive product in each of the categories

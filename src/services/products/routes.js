@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import db from "../../db/models/models.js";
+import db from "../../db/models/index.js";
 import express from "express";
 import s from "sequelize";
 import { productValidation } from "./validation.js";

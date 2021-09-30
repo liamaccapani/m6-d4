@@ -5,25 +5,22 @@ import s from "sequelize";
 
 const { DataTypes } = s
 
-const Review = sequelize.define(
-    "review", {
+const User = sequelize.define(
+    "user", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
-            autoIncrement: true
-        },
-        text: {
-            type: DataTypes.TEXT,
-            allowNull: false
+            autoIncrement: true 
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        image: {
+            type: DataTypes.STRING,
+            defaultValue: "https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-260nw-518740753.jpg"
         }
-    }, 
-    {
-        timestamps: false
     }
 )
 
-export default Review
+export default User
