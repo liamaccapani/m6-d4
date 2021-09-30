@@ -4,17 +4,22 @@ import express from "express";
 import s from "sequelize";
 import { productValidation } from "./validation.js";
 import { validationResult } from "express-validator";
+// import User from "../../db/models/users.js";
 
 
 const router = express.Router()
-const { Product, Review } = db
+const { Product, Review, User } = db
 const { Op } = s
 
+
+// category + user + reviews [ user who wrote review ]
 router.get("/", async (req, res, next) => {
     try {
         const data = await Product.findAll({
             attributes: {exclude: ["createdAt"]}, // "id"
-            include: Review
+            include: [
+                { model: Review, include: User}
+            ]
         })
         res.send(data)
 
@@ -43,19 +48,11 @@ router.post("/", productValidation, async (req, res, next) => {
 
 router.get("/:productId", async (req, res, next) => {
     try {
-        // const data = await Product.findAll({
-        //     where: { id: req.params.productId}
-        // })
-
-        // if(data){
-        //     res.send(data)
-        // } else {
-        //     next(createHttpError(404, "No product with that id"))
-        // }
-
         const data = await Product.findAll({
             where: { id: req.params.productId },
-            include: Review
+            include: [
+                { model: Review, include: User}
+            ]
         })
         res.send(data)
         

@@ -24,7 +24,7 @@ export const testDB = async () => {
 /* 2. establish connection --> sync() */
 export const connectDB = async () => {
     try {
-       await sequelize.sync({alter: true})
+       await sequelize.sync({ alter: true })
        console.log("🔗 DB is connected") 
     } catch (error) {
         console.log(error)

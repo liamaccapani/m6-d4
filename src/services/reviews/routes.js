@@ -7,13 +7,14 @@ import { validationResult } from "express-validator";
 
 
 const router = express.Router()
-const { Product, Review } = db
+const { Product, Review, User } = db
 const { Op } = s
 
 router.get("/", async (req, res, next) => {
     try {
         const data = await Review.findAll({
             attributes: {exclude: ["createdAt"]}, // "id"
+            include: User 
         })
         res.send(data)
 
@@ -40,6 +41,7 @@ router.post("/", reviewValidation, async (req, res, next) => {
     }
 })
 
+// not including User here
 router.get("/:reviewId", async (req, res, next) => {
     try {
         const data = await Review.findByPk(req.params.reviewId)

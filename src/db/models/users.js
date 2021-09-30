@@ -10,7 +10,7 @@ const User = sequelize.define(
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
-            autoIncrement: true 
+            autoIncrement: true
         },
         username: {
             type: DataTypes.STRING,
@@ -20,7 +20,6 @@ const User = sequelize.define(
             type: DataTypes.STRING,
             defaultValue: "https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-260nw-518740753.jpg"
         }
-    }
-)
+})
 
 export default User
