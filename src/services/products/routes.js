@@ -12,14 +12,15 @@ const { Category, Product, ProductCategory, Review, User } = db
 const { Op } = s
 
 
-// category + user ✅ + reviews [ user who wrote review ] ✅
+// category ✅ + user ✅ + reviews [ user who wrote review ] ✅
 router.get("/", async (req, res, next) => {
     try {
         const data = await Product.findAll({
             attributes: {exclude: ["createdAt"]},
             include: [
                 { model: Review, include: User},
-                Category
+                // to exclude all the data from joined table
+                { model: Category, through: { attributes: [] }}
             ]
         })
         res.send(data)
@@ -49,7 +50,7 @@ router.get("/:productId", async (req, res, next) => {
             where: { id: req.params.productId },
             include: [
                 { model: Review, include: User},
-                Category
+                { model: Category, through: { attributes: [] }}
             ]
         })
         res.send(data)
