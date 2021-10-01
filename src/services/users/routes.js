@@ -2,10 +2,11 @@ import createHttpError from "http-errors";
 import db from "../../db/models/index.js";
 import express from "express";
 import s from "sequelize";
+// import Product from "../../db/models/products.js";
 
 
 const router = express.Router()
-const { Review, User } = db
+const { Product, Review, User } = db
 const { Op } = s
 
 // get user and reviews
@@ -13,7 +14,7 @@ router.get("/", async (req, res, next) => {
     try {
         const data = await User.findAll({
             attributes: {exclude: ["createdAt", "updatedAt"]}, // "id"
-            include: Review
+            include: {model: Review, include: Product}
         })
         res.send(data)
 

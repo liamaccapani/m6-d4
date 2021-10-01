@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
     try {
         const data = await Review.findAll({
             attributes: {exclude: ["createdAt"]}, // "id"
-            include: User 
+            include: [Product, User] 
         })
         res.send(data)
 
@@ -24,21 +24,16 @@ router.get("/", async (req, res, next) => {
     }
 })
 
-router.post("/", reviewValidation, async (req, res, next) => {
-    const errorsList = validationResult(req);
-    if (!errorsList.isEmpty()) {
-        next(createHttpError(400, { errorsList }));
+router.post("/", async (req, res, next) => {
+    try {
+        const data = await Review.create(req.body)
+        res.status(201).send(data)
 
-    } else {
-        try {
-            const data = await Review.create(req.body)
-            res.status(201).send(data)
-
-        } catch (error) {
-        console.log(error)
-        next(error)  
-        }
+    } catch (error) {
+    console.log(error)
+    next(error)  
     }
+
 })
 
 // not including User here

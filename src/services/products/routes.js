@@ -16,9 +16,8 @@ const { Op } = s
 router.get("/", async (req, res, next) => {
     try {
         const data = await Product.findAll({
-            attributes: {exclude: ["createdAt"]}, // "id"
+            attributes: {exclude: ["createdAt"]},
             include: [
-                { model: Category, through: { attributes: []} },
                 { model: Review, include: User}
             ]
         })
