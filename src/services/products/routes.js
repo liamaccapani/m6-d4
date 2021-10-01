@@ -12,13 +12,14 @@ const { Category, Product, ProductCategory, Review, User } = db
 const { Op } = s
 
 
-// category + user + reviews [ user who wrote review ] ✅
+// category + user ✅ + reviews [ user who wrote review ] ✅
 router.get("/", async (req, res, next) => {
     try {
         const data = await Product.findAll({
             attributes: {exclude: ["createdAt"]},
             include: [
-                { model: Review, include: User}
+                { model: Review, include: User},
+                Category
             ]
         })
         res.send(data)
@@ -29,21 +30,17 @@ router.get("/", async (req, res, next) => {
     }
 })
 
-router.post("/", productValidation, async (req, res, next) => {
-    const errorsList = validationResult(req);
-    if (!errorsList.isEmpty()) {
-        next(createHttpError(400, { errorsList }));
+router.post("/", async (req, res, next) => {
+    try {
+        const product = await Product.create(req.body)
+        const addCategoryToProduct = await ProductCategory.create({productId: product.id, categoryId: req.body.categoryId})
+        res.status(201).send({addCategoryToProduct, product})
 
-    } else {
-        try {
-            const product = await Product.create(req.body)
-            res.status(201).send(product)
-
-        } catch (error) {
-        console.log(error)
-        next(error)  
-        }
+    } catch (error) {
+    console.log(error)
+    next(error)  
     }
+
 })
 
 router.get("/:productId", async (req, res, next) => {
@@ -51,7 +48,8 @@ router.get("/:productId", async (req, res, next) => {
         const data = await Product.findAll({
             where: { id: req.params.productId },
             include: [
-                { model: Review, include: User}
+                { model: Review, include: User},
+                Category
             ]
         })
         res.send(data)

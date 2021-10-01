@@ -2,7 +2,6 @@ import createHttpError from "http-errors";
 import db from "../../db/models/index.js";
 import express from "express";
 import s from "sequelize";
-// import Product from "../../db/models/products.js";
 
 
 const router = express.Router()
