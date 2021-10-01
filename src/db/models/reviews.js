@@ -16,10 +16,9 @@ const Review = sequelize.define(
             type: DataTypes.TEXT,
             allowNull: false
         }
-    }, 
-    {
-        timestamps: false
     }
 )
+
+// Review.sync({force: true})
 
 export default Review

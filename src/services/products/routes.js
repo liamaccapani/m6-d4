@@ -8,16 +8,17 @@ import { validationResult } from "express-validator";
 
 
 const router = express.Router()
-const { Product, Review, User } = db
+const { Category, Product, ProductCategory, Review, User } = db
 const { Op } = s
 
 
-// category + user + reviews [ user who wrote review ]
+// category + user + reviews [ user who wrote review ] ✅
 router.get("/", async (req, res, next) => {
     try {
         const data = await Product.findAll({
             attributes: {exclude: ["createdAt"]}, // "id"
             include: [
+                { model: Category, through: { attributes: []} },
                 { model: Review, include: User}
             ]
         })
@@ -36,8 +37,8 @@ router.post("/", productValidation, async (req, res, next) => {
 
     } else {
         try {
-            const data = await Product.create(req.body)
-            res.status(201).send(data)
+            const product = await Product.create(req.body)
+            res.status(201).send(product)
 
         } catch (error) {
         console.log(error)

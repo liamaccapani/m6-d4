@@ -15,3 +15,12 @@ In GET /products endpoint product should include categories, user and comments (
 Get the most expensive product in products table
 Get the most expensive product in products table and include Category
 Get the most expensive product in each of the categories
+
+
+{
+  "name": "Chinstrap Penguin Toy",
+  "categoryName": "Toys",
+  "img": "https://www.debonisarredo.it/site/images/joomlart/demo/default.jpg",
+  "price": 10,
+  "categoryId": 1
+}

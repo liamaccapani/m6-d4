@@ -16,10 +16,6 @@ const Product = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-        category: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         image: {
             type: DataTypes.STRING,
             defaultValue: "https://www.debonisarredo.it/site/images/joomlart/demo/default.jpg"
@@ -30,5 +26,7 @@ const Product = sequelize.define(
         }
     }
 )
+
+// Product.sync({force: true})
 
 export default Product

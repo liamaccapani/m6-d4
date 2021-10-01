@@ -12,7 +12,11 @@ const ProductCategory = sequelize.define(
             type: DataTypes.INTEGER,
             autoIncrement: true 
         }
+    },
+    {
+        timestamps: false
     }
 )
 
+// ProductCategory.sync({force: true})
 export default ProductCategory
