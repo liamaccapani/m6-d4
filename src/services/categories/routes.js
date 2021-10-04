@@ -5,16 +5,17 @@ import s from "sequelize";
 
 // FILTER BY CATEGORY
 const router = express.Router()
-const { Category } = db
+const { Category, Product  } = db
 const { Op } = s
 
 router.get("/", async (req, res, next) => {
     try {
         const data = await Category.findAll({
+            include: { model: Product, through: {attributes: []}},
             attributes: {exclude: ["createdAt"]}, // "id"
         })
         res.send(data)
-
+        
     } catch (error) {
         console.log(error)
         next(error)
